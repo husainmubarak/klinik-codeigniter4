@@ -1,51 +1,52 @@
 <?= $this->extend('App\Module\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
-    <div style="display: flex; gap: 8px;">
-        <a href="/pasien/<?= $pasien['id'] ?>/edit" class="btn btn-primary btn-sm" id="btn-edit-detail">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            Edit
+    <div class="btn-group" role="group">
+        <a href="<?= base_url('/pasien/' . $pasien['id'] . '/edit') ?>" class="btn btn-warning btn-sm" id="btn-edit-detail">
+            <i class="fas fa-edit mr-1"></i> Edit
         </a>
-        <a href="/pasien" class="btn btn-secondary btn-sm" id="btn-kembali">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Kembali
+        <a href="<?= base_url('/pasien') ?>" class="btn btn-secondary btn-sm" id="btn-kembali">
+            <i class="fas fa-arrow-left mr-1"></i> Kembali
         </a>
     </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-    <div class="card">
-        <div class="card-header">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <div>
-                <h2 style="margin-bottom: 4px;"><?= esc($pasien['nama']) ?></h2>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Detail informasi pasien</span>
+                <h6 class="m-0 font-weight-bold text-primary"><?= esc($pasien['nama']) ?></h6>
+                <small class="text-gray-500">Detail informasi pasien</small>
             </div>
-            <span class="badge <?= $pasien['jenis_kelamin'] === 'Laki-laki' ? 'badge-male' : 'badge-female' ?>">
-                <?= esc($pasien['jenis_kelamin']) ?>
-            </span>
+            <?php if ($pasien['jenis_kelamin'] === 'Laki-laki') : ?>
+                <span class="badge badge-info px-2 py-1"><i class="fas fa-mars mr-1"></i> Laki-laki</span>
+            <?php else : ?>
+                <span class="badge badge-warning px-2 py-1"><i class="fas fa-venus mr-1"></i> Perempuan</span>
+            <?php endif; ?>
         </div>
         <div class="card-body">
-            <div class="detail-grid">
-                <div class="detail-item">
-                    <div class="detail-label">Nomor Rekam Medis</div>
-                    <div class="detail-value" style="font-family: monospace; color: var(--accent-primary);">
-                        <?= esc($pasien['no_rm']) ?>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Nomor Rekam Medis</span>
+                    <span class="h5 font-weight-bold text-gray-800 font-monospace"><?= esc($pasien['no_rm']) ?></span>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Nama Lengkap</div>
-                    <div class="detail-value"><?= esc($pasien['nama']) ?></div>
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Nama Lengkap</span>
+                    <span class="h5 font-weight-bold text-gray-800"><?= esc($pasien['nama']) ?></span>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Jenis Kelamin</div>
-                    <div class="detail-value"><?= esc($pasien['jenis_kelamin']) ?></div>
+            </div>
+            <hr class="my-2">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Jenis Kelamin</span>
+                    <span class="h6 font-weight-bold text-gray-800"><?= esc($pasien['jenis_kelamin']) ?></span>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Tanggal Lahir</div>
-                    <div class="detail-value">
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Tanggal Lahir</span>
+                    <span class="h6 font-weight-bold text-gray-800">
                         <?= date('d F Y', strtotime($pasien['tanggal_lahir'])) ?>
-                        <span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 4px;">
+                        <span class="text-gray-500 text-xs ml-1">
                             (<?php
                                 $birthDate = new DateTime($pasien['tanggal_lahir']);
                                 $now = new DateTime();
@@ -53,26 +54,26 @@
                                 echo $age->y . ' tahun';
                             ?>)
                         </span>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">No. Telepon</div>
-                    <div class="detail-value"><?= esc($pasien['no_telepon'] ?: '—') ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Terdaftar Sejak</div>
-                    <div class="detail-value">
-                        <?= $pasien['created_at'] ? date('d F Y, H:i', strtotime($pasien['created_at'])) : '—' ?>
-                    </div>
+                    </span>
                 </div>
             </div>
-
-            <!-- Alamat full width -->
-            <div style="padding-top: 16px; margin-top: 0;">
-                <div class="detail-label">Alamat Lengkap</div>
-                <div class="detail-value" style="margin-top: 6px; line-height: 1.7;">
-                    <?= nl2br(esc($pasien['alamat'])) ?>
+            <hr class="my-2">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">No. Telepon</span>
+                    <span class="h6 font-weight-bold text-gray-800"><?= esc($pasien['no_telepon'] ?: '—') ?></span>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Terdaftar Sejak</span>
+                    <span class="h6 font-weight-bold text-gray-800">
+                        <?= $pasien['created_at'] ? date('d F Y, H:i', strtotime($pasien['created_at'])) : '—' ?>
+                    </span>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="mb-3">
+                <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Alamat Lengkap</span>
+                <span class="h6 text-gray-800"><?= nl2br(esc($pasien['alamat'])) ?></span>
             </div>
         </div>
     </div>

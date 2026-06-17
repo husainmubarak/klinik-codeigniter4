@@ -13,17 +13,17 @@
     <div class="stat-cards">
         <div class="stat-card">
             <div class="stat-card-label">Total Pasien</div>
-            <div class="stat-card-value gradient"><?= count($pasien) ?></div>
+            <div class="stat-card-value" style="color: var(--accent-primary);"><?= count($pasien) ?></div>
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Laki-laki</div>
-            <div class="stat-card-value" style="color: var(--info);">
+            <div class="stat-card-value" style="color: #0284c7;">
                 <?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'Laki-laki')) ?>
             </div>
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Perempuan</div>
-            <div class="stat-card-value" style="color: #f472b6;">
+            <div class="stat-card-value" style="color: #db2777;">
                 <?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'Perempuan')) ?>
             </div>
         </div>

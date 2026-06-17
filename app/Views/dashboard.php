@@ -1,154 +1,179 @@
 <?= $this->extend('App\Module\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
-    <span style="font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
-        <span style="width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; display: inline-block; box-shadow: 0 0 8px var(--success);"></span>
-        Sistem Berjalan Normal
+    <span class="badge badge-success py-2 px-3">
+        <i class="fas fa-check-circle mr-1"></i> Sistem Berjalan Normal
     </span>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
     <!-- Welcome Card -->
-    <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%); border-color: rgba(108, 99, 255, 0.2);">
-        <div class="card-body" style="padding: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <div>
-                <h1 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                    Selamat Datang di KlinikPro
-                </h1>
-                <p style="color: var(--text-secondary); max-width: 550px; font-size: 0.9rem;">
-                    Kelola data pasien, rekam medis, antrean, dan administrasi klinik dalam satu dasbor terintegrasi yang modern dan cepat.
-                </p>
-            </div>
-            <div style="display: flex; gap: 12px;">
-                <a href="/pasien/create" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    Pasien Baru
-                </a>
-                <a href="/pasien" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    Cari Data
-                </a>
+    <div class="card shadow mb-4">
+        <div class="card-body p-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="text-primary font-weight-bold">Selamat Datang di KlinikPro</h1>
+                    <p class="lead text-gray-800">Kelola data pasien, rekam medis, antrean, dan administrasi klinik dalam satu dasbor terintegrasi yang modern dan cepat.</p>
+                </div>
+                <div class="col-lg-4 text-right">
+                    <a href="<?= base_url('/pasien/create') ?>" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="fas fa-plus mr-1"></i> Pasien Baru
+                    </a>
+                    <a href="<?= base_url('/pasien') ?>" class="btn btn-secondary btn-lg shadow-sm ml-2">
+                        <i class="fas fa-search mr-1"></i> Cari Data
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Quick Stats -->
-    <div class="stat-cards">
-        <div class="stat-card">
-            <div class="stat-card-label">Total Pasien</div>
-            <div class="stat-card-value gradient"><?= esc($stats['total']) ?></div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Terdaftar di database</div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Pasien</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= esc($stats['total']) ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-card-label">Kunjungan Hari Ini</div>
-            <div class="stat-card-value" style="color: var(--info);">12</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Pasien rawat jalan</div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Kunjungan Hari Ini</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-card-label">Antrean Aktif</div>
-            <div class="stat-card-value" style="color: var(--warning);">3</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Sedang menunggu dokter</div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Antrean Aktif</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-card-label">Kapasitas Kamar</div>
-            <div class="stat-card-value" style="color: var(--success);">85%</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Tersedia 3 dari 20 bed</div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Kapasitas Kamar</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">85%</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bed fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; margin-top: 24px;" id="dashboard-grid">
+    <div class="row">
         <!-- Recent Patients -->
-        <div class="card">
-            <div class="card-header">
-                <h2>Pasien Baru Terdaftar</h2>
-                <a href="/pasien" style="font-size: 0.8rem; color: var(--accent-primary); text-decoration: none; font-weight: 600;">Lihat Semua</a>
-            </div>
-            <div class="card-body" style="padding: 0;">
-                <?php if (empty($recentPatients)) : ?>
-                    <div class="empty-state" style="padding: 40px 20px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-                        <h3>Belum ada pasien</h3>
-                        <p>Daftar pasien baru untuk mengisi riwayat klinik.</p>
-                    </div>
-                <?php else : ?>
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>No. RM</th>
-                                    <th>Nama</th>
-                                    <th>L/P</th>
-                                    <th>Terdaftar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($recentPatients as $p) : ?>
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Pasien Baru Terdaftar</h6>
+                    <a href="<?= base_url('/pasien') ?>" class="btn btn-sm btn-link text-primary font-weight-bold p-0">Lihat Semua</a>
+                </div>
+                <div class="card-body p-0">
+                    <?php if (empty($recentPatients)) : ?>
+                        <div class="text-center py-5">
+                            <i class="fas fa-user-slash fa-3x text-gray-300 mb-3"></i>
+                            <h6 class="text-gray-800 font-weight-bold">Belum ada pasien</h6>
+                            <p class="text-gray-500 mb-0">Daftar pasien baru untuk mengisi riwayat klinik.</p>
+                        </div>
+                    <?php else : ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover mb-0" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <span style="font-family: monospace; font-size: 0.82rem; color: var(--accent-primary); font-weight: 600;"><?= esc($p['no_rm']) ?></span>
-                                        </td>
-                                        <td class="td-name"><?= esc($p['nama']) ?></td>
-                                        <td>
-                                            <span class="badge <?= $p['jenis_kelamin'] === 'Laki-laki' ? 'badge-male' : 'badge-female' ?>" style="padding: 2px 8px; font-size: 0.68rem;">
-                                                <?= $p['jenis_kelamin'] === 'Laki-laki' ? 'L' : 'P' ?>
-                                            </span>
-                                        </td>
-                                        <td style="font-size: 0.8rem; color: var(--text-muted);">
-                                            <?= date('d M H:i', strtotime($p['created_at'])) ?>
-                                        </td>
+                                        <th>No. RM</th>
+                                        <th>Nama</th>
+                                        <th>L/P</th>
+                                        <th>Terdaftar</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recentPatients as $p) : ?>
+                                        <tr>
+                                            <td>
+                                                <code class="text-primary font-weight-bold"><?= esc($p['no_rm']) ?></code>
+                                            </td>
+                                            <td class="font-weight-bold text-gray-800"><?= esc($p['nama']) ?></td>
+                                            <td>
+                                                <?php if ($p['jenis_kelamin'] === 'Laki-laki') : ?>
+                                                    <span class="badge badge-info">L</span>
+                                                <?php else : ?>
+                                                    <span class="badge badge-warning">P</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= date('d M H:i', strtotime($p['created_at'])) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 
         <!-- Quick Access & Info -->
-        <div style="display: flex; flex-direction: column; gap: 24px;">
-            <!-- Service Shortcuts -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Akses Cepat Modul</h2>
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Akses Cepat Modul</h6>
                 </div>
-                <div class="card-body" style="display: flex; flex-direction: column; gap: 12px;">
-                    <a href="/pasien" class="sidebar-link" style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin: 0; display: flex; align-items: center;">
-                        <span style="background: rgba(108, 99, 255, 0.15); color: var(--accent-primary); padding: 10px; border-radius: var(--radius-sm); margin-right: 14px; display: inline-flex; align-items: center; justify-content: center;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-                        </span>
-                        <div>
-                            <div style="color: var(--text-primary); font-weight: 600; font-size: 0.85rem;">Kelola Data Pasien</div>
-                            <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Lihat, tambah, edit, dan hapus rekam pasien.</div>
-                        </div>
+                <div class="card-body">
+                    <a href="<?= base_url('/pasien') ?>" class="btn btn-outline-primary btn-block text-left p-3 mb-3">
+                        <i class="fas fa-user-injured mr-2"></i> Kelola Data Pasien
                     </a>
-                    
-                    <div class="sidebar-link" style="opacity: 0.6; cursor: not-allowed; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin: 0; display: flex; align-items: center;">
-                        <span style="background: rgba(96, 165, 250, 0.15); color: var(--info); padding: 10px; border-radius: var(--radius-sm); margin-right: 14px; display: inline-flex; align-items: center; justify-content: center;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        </span>
-                        <div>
-                            <div style="color: var(--text-primary); font-weight: 600; font-size: 0.85rem;">E-Rekam Medis (SOAP)</div>
-                            <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Catat riwayat pemeriksaan kesehatan pasien.</div>
-                        </div>
-                    </div>
+                    <button class="btn btn-outline-secondary btn-block text-left p-3" disabled>
+                        <i class="fas fa-file-medical mr-2"></i> E-Rekam Medis (SOAP)
+                    </button>
                 </div>
             </div>
 
-            <!-- Developer Info / Meta -->
-            <div class="card">
-                <div class="card-body" style="padding: 20px; font-size: 0.8rem; color: var(--text-secondary);">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <div class="card shadow mb-4">
+                <div class="card-body font-weight-bold text-gray-800">
+                    <div class="d-flex justify-content-between mb-2">
                         <span>PHP Version</span>
-                        <span style="font-family: monospace; color: var(--text-primary);"><?= PHP_VERSION ?></span>
+                        <code><?= PHP_VERSION ?></code>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <div class="d-flex justify-content-between mb-2">
                         <span>Framework</span>
-                        <span style="color: var(--text-primary);">CodeIgniter 4.7.3</span>
+                        <span>CodeIgniter 4.7.3</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between;">
+                    <div class="d-flex justify-content-between">
                         <span>Environment</span>
-                        <span style="color: var(--success); font-weight: 600;"><?= esc(ENVIRONMENT) ?></span>
+                        <span class="text-success"><?= esc(ENVIRONMENT) ?></span>
                     </div>
                 </div>
             </div>
@@ -158,7 +183,6 @@
 
 <?= $this->section('scripts') ?>
 <script>
-    // Set active sidebar navigation dynamically
     document.addEventListener('DOMContentLoaded', function() {
         const navPasien = document.getElementById('nav-pasien');
         const navDashboard = document.getElementById('nav-dashboard');
@@ -167,13 +191,4 @@
         if (navDashboard) navDashboard.classList.add('active');
     });
 </script>
-
-<style>
-    /* Responsive adjustment for dashboard grid */
-    @media (max-width: 992px) {
-        #dashboard-grid {
-            grid-template-columns: 1fr !important;
-        }
-    }
-</style>
 <?= $this->endSection() ?>

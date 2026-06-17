@@ -1,96 +1,110 @@
 <?= $this->extend('App\Module\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
-    <a href="/pasien" class="btn btn-secondary" id="btn-kembali">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        Kembali
+    <a href="<?= base_url('/pasien') ?>" class="btn btn-secondary btn-sm shadow-sm" id="btn-kembali">
+        <i class="fas fa-arrow-left fa-sm mr-1"></i> Kembali
     </a>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
     <?php if ($validation) : ?>
-        <div class="alert alert-danger" id="alert-validation">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-validation">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
             Terdapat kesalahan pada formulir. Silakan periksa kembali.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <?php endif; ?>
 
-    <div class="card">
-        <div class="card-header">
-            <h2>Edit Data — <?= esc($pasien['nama']) ?></h2>
-            <span class="badge badge-male" style="font-size: 0.75rem;"><?= esc($pasien['no_rm']) ?></span>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Edit Data — <?= esc($pasien['nama']) ?></h6>
+            <span class="badge badge-info py-2 px-3"><?= esc($pasien['no_rm']) ?></span>
         </div>
         <div class="card-body">
-            <form action="/pasien/<?= $pasien['id'] ?>/update" method="post" id="form-edit-pasien">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="no_rm" class="form-label">Nomor Rekam Medis *</label>
-                        <input type="text" name="no_rm" id="no_rm" class="form-control"
+            <form action="<?= base_url('/pasien/' . $pasien['id'] . '/update') ?>" method="post" id="form-edit-pasien">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="no_rm" class="text-gray-800 font-weight-bold">Nomor Rekam Medis *</label>
+                        <input type="text" name="no_rm" id="no_rm" class="form-control <?= isset($validation['no_rm']) ? 'is-invalid' : '' ?>"
                                value="<?= old('no_rm', $pasien['no_rm']) ?>" required>
                         <?php if (isset($validation['no_rm'])) : ?>
-                            <div class="form-error"><?= $validation['no_rm'] ?></div>
+                            <div class="invalid-feedback"><?= $validation['no_rm'] ?></div>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group">
-                        <label for="nama" class="form-label">Nama Lengkap *</label>
-                        <input type="text" name="nama" id="nama" class="form-control"
+                    <div class="col-md-6 form-group">
+                        <label for="nama" class="text-gray-800 font-weight-bold">Nama Lengkap *</label>
+                        <input type="text" name="nama" id="nama" class="form-control <?= isset($validation['nama']) ? 'is-invalid' : '' ?>"
                                value="<?= old('nama', $pasien['nama']) ?>" required>
                         <?php if (isset($validation['nama'])) : ?>
-                            <div class="form-error"><?= $validation['nama'] ?></div>
+                            <div class="invalid-feedback"><?= $validation['nama'] ?></div>
                         <?php endif; ?>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="jenis_kelamin" class="form-label">Jenis Kelamin *</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="jenis_kelamin" class="text-gray-800 font-weight-bold">Jenis Kelamin *</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control <?= isset($validation['jenis_kelamin']) ? 'is-invalid' : '' ?>" required>
                             <option value="">— Pilih Jenis Kelamin —</option>
                             <option value="Laki-laki" <?= old('jenis_kelamin', $pasien['jenis_kelamin']) === 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
                             <option value="Perempuan" <?= old('jenis_kelamin', $pasien['jenis_kelamin']) === 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
                         </select>
                         <?php if (isset($validation['jenis_kelamin'])) : ?>
-                            <div class="form-error"><?= $validation['jenis_kelamin'] ?></div>
+                            <div class="invalid-feedback"><?= $validation['jenis_kelamin'] ?></div>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group">
-                        <label for="tanggal_lahir" class="form-label">Tanggal Lahir *</label>
-                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                    <div class="col-md-6 form-group">
+                        <label for="tanggal_lahir" class="text-gray-800 font-weight-bold">Tanggal Lahir *</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control <?= isset($validation['tanggal_lahir']) ? 'is-invalid' : '' ?>"
                                value="<?= old('tanggal_lahir', $pasien['tanggal_lahir']) ?>" required>
                         <?php if (isset($validation['tanggal_lahir'])) : ?>
-                            <div class="form-error"><?= $validation['tanggal_lahir'] ?></div>
+                            <div class="invalid-feedback"><?= $validation['tanggal_lahir'] ?></div>
                         <?php endif; ?>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="no_telepon" class="form-label">No. Telepon</label>
-                    <input type="tel" name="no_telepon" id="no_telepon" class="form-control"
+                    <label for="no_telepon" class="text-gray-800 font-weight-bold">No. Telepon</label>
+                    <input type="tel" name="no_telepon" id="no_telepon" class="form-control <?= isset($validation['no_telepon']) ? 'is-invalid' : '' ?>"
                            value="<?= old('no_telepon', $pasien['no_telepon']) ?>">
                     <?php if (isset($validation['no_telepon'])) : ?>
-                        <div class="form-error"><?= $validation['no_telepon'] ?></div>
+                        <div class="invalid-feedback"><?= $validation['no_telepon'] ?></div>
                     <?php endif; ?>
                 </div>
 
                 <div class="form-group">
-                    <label for="alamat" class="form-label">Alamat Lengkap *</label>
-                    <textarea name="alamat" id="alamat" class="form-control"
-                              required><?= old('alamat', $pasien['alamat']) ?></textarea>
+                    <label for="alamat" class="text-gray-800 font-weight-bold">Alamat Lengkap *</label>
+                    <textarea name="alamat" id="alamat" class="form-control <?= isset($validation['alamat']) ? 'is-invalid' : '' ?>"
+                              rows="3" required><?= old('alamat', $pasien['alamat']) ?></textarea>
                     <?php if (isset($validation['alamat'])) : ?>
-                        <div class="form-error"><?= $validation['alamat'] ?></div>
+                        <div class="invalid-feedback"><?= $validation['alamat'] ?></div>
                     <?php endif; ?>
                 </div>
 
-                <div style="display: flex; gap: 12px; padding-top: 8px;">
+                <div class="mt-4">
                     <button type="submit" class="btn btn-primary" id="btn-update">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        Perbarui Data
+                        <i class="fas fa-save mr-1"></i> Perbarui Data
                     </button>
-                    <a href="/pasien" class="btn btn-secondary" id="btn-batal">Batal</a>
+                    <a href="<?= base_url('/pasien') ?>" class="btn btn-secondary" id="btn-batal">Batal</a>
                 </div>
             </form>
         </div>
     </div>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    // Set active sidebar navigation dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+        const navPasien = document.getElementById('nav-pasien');
+        const navDashboard = document.getElementById('nav-dashboard');
+        
+        if (navDashboard) navDashboard.classList.remove('active');
+        if (navPasien) navPasien.classList.add('active');
+    });
+</script>
 <?= $this->endSection() ?>
