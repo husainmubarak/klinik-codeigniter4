@@ -6,7 +6,7 @@
 
     <div class="card mb-4">
         <div class="card-body">
-            <form action="/laporan" method="get" class="row g-3 align-items-end">
+            <form action="<?= base_url() ?>laporan" method="get" class="row g-3 align-items-end">
                 <div class="col-md-4">
                     <label class="form-label">Tanggal Awal</label>
                     <input type="date" name="tgl_awal" class="form-control" value="<?= esc($tgl_awal) ?>">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <a href="/laporan/export-pdf?tgl_awal=<?= $tgl_awal ?>&tgl_akhir=<?= $tgl_akhir ?>" class="btn btn-danger" target="_blank">
+                    <a href="<?= base_url() ?>laporan/export-pdf?tgl_awal=<?= $tgl_awal ?>&tgl_akhir=<?= $tgl_akhir ?>" class="btn btn-danger" target="_blank">
                         <i class="bi bi-file-pdf"></i> Export PDF
                     </a>
                 </div>

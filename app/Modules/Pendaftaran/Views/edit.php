@@ -8,7 +8,7 @@
         <div class="card-body">
             <?php $validation = \Config\Services::validation(); ?>
             
-            <form action="/pendaftaran/<?= $pendaftaran['id'] ?>" method="post">
+            <form action="<?= base_url() ?>pendaftaran/<?= $pendaftaran['id'] ?>" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="mb-3">
                     <label for="pasien_id" class="form-label">Pasien</label>
@@ -78,7 +78,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a href="/pendaftaran" class="btn btn-secondary">Kembali</a>
+                <a href="<?= base_url() ?>pendaftaran" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

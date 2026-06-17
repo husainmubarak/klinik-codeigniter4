@@ -8,7 +8,7 @@
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
     <?php endif; ?>
 
-    <a href="/pendaftaran/new" class="btn btn-primary mb-3">Tambah Pendaftaran</a>
+    <a href="<?= base_url() ?>pendaftaran/new" class="btn btn-primary mb-3">Tambah Pendaftaran</a>
 
     <div class="card">
         <div class="card-body">
@@ -45,8 +45,8 @@
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="/pendaftaran/<?= $p['id'] ?>/edit" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="/pendaftaran/<?= $p['id'] ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?');">
+                                <a href="<?= base_url() ?>pendaftaran/<?= $p['id'] ?>/edit" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="<?= base_url() ?>pendaftaran/<?= $p['id'] ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                 </form>

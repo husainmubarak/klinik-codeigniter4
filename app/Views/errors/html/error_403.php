@@ -9,7 +9,7 @@
         <h1 class="display-1">403</h1>
         <h2>Akses Ditolak</h2>
         <p>Anda tidak memiliki izin untuk mengakses halaman ini.</p>
-        <a href="/pendaftaran" class="btn btn-primary">Kembali</a>
+        <a href="<?= base_url() ?>pendaftaran" class="btn btn-primary">Kembali</a>
     </div>
 </body>
 </html>

@@ -68,14 +68,14 @@ class PendaftaranController extends BaseController
             'status' => 'menunggu'
         ]);
 
-        return redirect()->to('/pendaftaran')->with('success', 'Data pendaftaran berhasil ditambahkan');
+        return redirect()->to('pendaftaran')->with('success', 'Data pendaftaran berhasil ditambahkan');
     }
 
     public function edit($id = null)
     {
         $data['pendaftaran'] = $this->model->find($id);
         if (empty($data['pendaftaran'])) {
-            return redirect()->to('/pendaftaran');
+            return redirect()->to('pendaftaran');
         }
         $data['title'] = 'Edit Pendaftaran';
         $data['pasiens'] = $this->pasienModel->findAll();
@@ -109,12 +109,12 @@ class PendaftaranController extends BaseController
             'status' => $this->request->getPost('status')
         ]);
 
-        return redirect()->to('/pendaftaran')->with('success', 'Data pendaftaran berhasil diperbarui');
+        return redirect()->to('pendaftaran')->with('success', 'Data pendaftaran berhasil diperbarui');
     }
 
     public function delete($id = null)
     {
         $this->model->delete($id);
-        return redirect()->to('/pendaftaran')->with('success', 'Data pendaftaran berhasil dihapus');
+        return redirect()->to('pendaftaran')->with('success', 'Data pendaftaran berhasil dihapus');
     }
 }

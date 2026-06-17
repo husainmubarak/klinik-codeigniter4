@@ -59,14 +59,14 @@ class DokterController extends BaseController
             'email' => $this->request->getPost('email')
         ]);
 
-        return redirect()->to('/dokter')->with('success', 'Data dokter berhasil ditambahkan');
+        return redirect()->to('dokter')->with('success', 'Data dokter berhasil ditambahkan');
     }
 
     public function edit($id = null)
     {
         $data['dokter'] = $this->model->find($id);
         if (empty($data['dokter'])) {
-            return redirect()->to('/dokter');
+            return redirect()->to('dokter');
         }
         $data['title'] = 'Edit Dokter';
         $data['polis'] = $this->poliModel->findAll();
@@ -103,12 +103,12 @@ class DokterController extends BaseController
             'email' => $this->request->getPost('email')
         ]);
 
-        return redirect()->to('/dokter')->with('success', 'Data dokter berhasil diperbarui');
+        return redirect()->to('dokter')->with('success', 'Data dokter berhasil diperbarui');
     }
 
     public function delete($id = null)
     {
         $this->model->delete($id);
-        return redirect()->to('/dokter')->with('success', 'Data dokter berhasil dihapus');
+        return redirect()->to('dokter')->with('success', 'Data dokter berhasil dihapus');
     }
 }

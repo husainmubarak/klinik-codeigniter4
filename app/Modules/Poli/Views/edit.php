@@ -8,7 +8,7 @@
         <div class="card-body">
             <?php $validation = \Config\Services::validation(); ?>
             
-            <form action="/poli/<?= $poli['id'] ?>" method="post">
+            <form action="<?= base_url() ?>poli/<?= $poli['id'] ?>" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="mb-3">
                     <label for="nama_poli" class="form-label">Nama Poli</label>
@@ -27,7 +27,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a href="/poli" class="btn btn-secondary">Kembali</a>
+                <a href="<?= base_url() ?>poli" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

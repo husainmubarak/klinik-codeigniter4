@@ -56,14 +56,14 @@ class PoliController extends BaseController
             'keterangan' => $this->request->getPost('keterangan')
         ]);
 
-        return redirect()->to('/poli')->with('success', 'Data poli berhasil ditambahkan');
+        return redirect()->to('poli')->with('success', 'Data poli berhasil ditambahkan');
     }
 
     public function edit($id = null)
     {
         $data['poli'] = $this->model->find($id);
         if (empty($data['poli'])) {
-            return redirect()->to('/poli');
+            return redirect()->to('poli');
         }
         $data['title'] = 'Edit Poli';
         $data['validation'] = \Config\Services::validation();
@@ -100,12 +100,12 @@ class PoliController extends BaseController
             'keterangan' => $this->request->getPost('keterangan')
         ]);
 
-        return redirect()->to('/poli')->with('success', 'Data poli berhasil diperbarui');
+        return redirect()->to('poli')->with('success', 'Data poli berhasil diperbarui');
     }
 
     public function delete($id = null)
     {
         $this->model->delete($id);
-        return redirect()->to('/poli')->with('success', 'Data poli berhasil dihapus');
+        return redirect()->to('poli')->with('success', 'Data poli berhasil dihapus');
     }
 }

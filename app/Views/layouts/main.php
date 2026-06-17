@@ -29,13 +29,13 @@
         <div class="sidebar p-3" style="width: 250px;">
             <h4>KlinikKu</h4>
             <hr>
-            <a href="/pendaftaran" class="<?= uri_string() == 'pendaftaran' ? 'active' : '' ?>"><i class="bi bi-calendar-check"></i> Pendaftaran</a>
-            <a href="/pasien" class="<?= uri_string() == 'pasien' ? 'active' : '' ?>"><i class="bi bi-person"></i> Pasien</a>
+            <a href="<?= base_url() ?>pendaftaran" class="<?= uri_string() == 'pendaftaran' ? 'active' : '' ?>"><i class="bi bi-calendar-check"></i> Pendaftaran</a>
+            <a href="<?= base_url() ?>pasien" class="<?= uri_string() == 'pasien' ? 'active' : '' ?>"><i class="bi bi-person"></i> Pasien</a>
             
             <?php if(session()->get('role') == 'admin'): ?>
-                <a href="/dokter" class="<?= uri_string() == 'dokter' ? 'active' : '' ?>"><i class="bi bi-heart-pulse"></i> Dokter</a>
-                <a href="/poli" class="<?= uri_string() == 'poli' ? 'active' : '' ?>"><i class="bi bi-building"></i> Poli</a>
-                <a href="/laporan" class="<?= uri_string() == 'laporan' ? 'active' : '' ?>"><i class="bi bi-file-earmark-text"></i> Laporan</a>
+                <a href="<?= base_url() ?>dokter" class="<?= uri_string() == 'dokter' ? 'active' : '' ?>"><i class="bi bi-heart-pulse"></i> Dokter</a>
+                <a href="<?= base_url() ?>poli" class="<?= uri_string() == 'poli' ? 'active' : '' ?>"><i class="bi bi-building"></i> Poli</a>
+                <a href="<?= base_url() ?>laporan" class="<?= uri_string() == 'laporan' ? 'active' : '' ?>"><i class="bi bi-file-earmark-text"></i> Laporan</a>
             <?php endif; ?>
         </div>
 
@@ -52,7 +52,7 @@
                             Halo, <strong><?= session()->get('username') ?></strong> 
                             <span class="badge bg-<?= session()->get('role') == 'admin' ? 'danger' : 'primary' ?>"><?= ucfirst(session()->get('role')) ?></span>
                         </span>
-                        <a href="/logout" class="btn btn-sm btn-outline-danger">Logout</a>
+                        <a href="<?= base_url() ?>logout" class="btn btn-sm btn-outline-danger">Logout</a>
                     </div>
                 </div>
             </nav>

@@ -8,7 +8,7 @@
         <div class="card-body">
             <?php $validation = \Config\Services::validation(); ?>
             
-            <form action="/pendaftaran" method="post">
+            <form action="<?= base_url() ?>pendaftaran" method="post">
                 <div class="mb-3">
                     <label for="pasien_id" class="form-label">Pasien</label>
                     <select class="form-control <?= $validation->hasError('pasien_id') ? 'is-invalid' : '' ?>" id="pasien_id" name="pasien_id">
@@ -65,7 +65,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="/pendaftaran" class="btn btn-secondary">Kembali</a>
+                <a href="<?= base_url() ?>pendaftaran" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

@@ -10,7 +10,7 @@ class AuthController extends BaseController
     public function login()
     {
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/pendaftaran');
+            return redirect()->to('pendaftaran');
         }
         return view('App\Modules\Auth\Views\login');
     }
@@ -36,14 +36,14 @@ class AuthController extends BaseController
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($ses_data);
-                return redirect()->to('/pendaftaran');
+                return redirect()->to('pendaftaran');
             } else {
                 $session->setFlashdata('error', 'Password Salah.');
-                return redirect()->to('/login');
+                return redirect()->to('login');
             }
         } else {
             $session->setFlashdata('error', 'Email tidak ditemukan.');
-            return redirect()->to('/login');
+            return redirect()->to('login');
         }
     }
 
@@ -51,6 +51,6 @@ class AuthController extends BaseController
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('login');
     }
 }

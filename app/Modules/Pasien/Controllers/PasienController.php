@@ -71,7 +71,7 @@ class PasienController extends BaseController
             'no_telepon'    => $this->request->getPost('no_telepon'),
         ]);
 
-        return redirect()->to('/pasien')->with('success', 'Data pasien berhasil ditambahkan.');
+        return redirect()->to('pasien')->with('success', 'Data pasien berhasil ditambahkan.');
     }
 
     /**
@@ -146,7 +146,7 @@ class PasienController extends BaseController
             'no_telepon'    => $this->request->getPost('no_telepon'),
         ]);
 
-        return redirect()->to('/pasien')->with('success', 'Data pasien berhasil diperbarui.');
+        return redirect()->to('pasien')->with('success', 'Data pasien berhasil diperbarui.');
     }
 
     /**
@@ -162,6 +162,6 @@ class PasienController extends BaseController
 
         $this->pasienModel->delete($id);
 
-        return redirect()->to('/pasien')->with('success', 'Data pasien berhasil dihapus.');
+        return redirect()->to('pasien')->with('success', 'Data pasien berhasil dihapus.');
     }
 }

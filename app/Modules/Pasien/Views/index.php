@@ -1,7 +1,7 @@
 <?= $this->extend('App\Modules\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
-    <a href="/pasien/create" class="btn btn-primary" id="btn-tambah-pasien">
+    <a href="<?= base_url() ?>pasien/create" class="btn btn-primary" id="btn-tambah-pasien">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         Tambah Pasien
     </a>
@@ -41,7 +41,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <h3>Belum ada data pasien</h3>
                 <p>Mulai tambahkan data pasien untuk mengelola rekam medis klinik Anda.</p>
-                <a href="/pasien/create" class="btn btn-primary" id="btn-tambah-pasien-empty">
+                <a href="<?= base_url() ?>pasien/create" class="btn btn-primary" id="btn-tambah-pasien-empty">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     Tambah Pasien Pertama
                 </a>
@@ -75,10 +75,10 @@
                                 <td><?= esc($p['no_telepon'] ?: '—') ?></td>
                                 <td>
                                     <div class="td-actions">
-                                        <a href="/pasien/<?= $p['id'] ?>" class="btn btn-secondary btn-sm btn-icon" title="Lihat Detail" id="btn-lihat-<?= $p['id'] ?>">
+                                        <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>" class="btn btn-secondary btn-sm btn-icon" title="Lihat Detail" id="btn-lihat-<?= $p['id'] ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                         </a>
-                                        <a href="/pasien/<?= $p['id'] ?>/edit" class="btn btn-secondary btn-sm btn-icon" title="Edit" id="btn-edit-<?= $p['id'] ?>">
+                                        <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>/edit" class="btn btn-secondary btn-sm btn-icon" title="Edit" id="btn-edit-<?= $p['id'] ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                         </a>
                                         <button class="btn btn-danger btn-sm btn-icon" title="Hapus" onclick="confirmDelete(<?= $p['id'] ?>, '<?= esc($p['nama']) ?>')" id="btn-hapus-<?= $p['id'] ?>">
@@ -115,7 +115,7 @@
 <script>
     function confirmDelete(id, name) {
         document.getElementById('delete-name').textContent = name;
-        document.getElementById('delete-form').action = '/pasien/' + id + '/delete';
+        document.getElementById('delete-form').action = '<?= base_url() ?>pasien/' + id + '/delete';
         document.getElementById('confirm-overlay').classList.add('show');
     }
 

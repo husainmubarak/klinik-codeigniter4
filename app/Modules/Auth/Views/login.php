@@ -18,7 +18,7 @@
                             <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
                         <?php endif;?>
 
-                        <form action="/login" method="post">
+                        <form action="<?= base_url() ?>login" method="post">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" name="email" class="form-control" id="email" required>
