@@ -1,4 +1,4 @@
-<?= $this->extend('App\Module\Pasien\Views\layout') ?>
+<?= $this->extend('App\Modules\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
     <div class="btn-group" role="group">

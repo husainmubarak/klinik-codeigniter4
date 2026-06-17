@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Pasien\Models;
+namespace App\Modules\Pasien\Models;
 
 use CodeIgniter\Model;
 

@@ -1,4 +1,4 @@
-<?= $this->extend('App\Module\Pasien\Views\layout') ?>
+<?= $this->extend('App\Modules\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
     <a href="<?= base_url('/pasien') ?>" class="btn btn-secondary btn-sm shadow-sm" id="btn-kembali">

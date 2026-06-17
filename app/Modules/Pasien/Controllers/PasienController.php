@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Pasien\Controllers;
+namespace App\Modules\Pasien\Controllers;
 
 use App\Controllers\BaseController;
-use App\Module\Pasien\Models\PasienModel;
+use App\Modules\Pasien\Models\PasienModel;
 
 class PasienController extends BaseController
 {
@@ -24,7 +24,7 @@ class PasienController extends BaseController
             'pasien'  => $this->pasienModel->orderBy('created_at', 'DESC')->findAll(),
         ];
 
-        return view('App\Module\Pasien\Views\index', $data);
+        return view('App\Modules\Pasien\Views\index', $data);
     }
 
     /**
@@ -37,7 +37,7 @@ class PasienController extends BaseController
             'validation' => session()->getFlashdata('validation'),
         ];
 
-        return view('App\Module\Pasien\Views\create', $data);
+        return view('App\Modules\Pasien\Views\create', $data);
     }
 
     /**
@@ -86,7 +86,7 @@ class PasienController extends BaseController
             'pasien' => $pasien,
         ];
 
-        return view('App\Module\Pasien\Views\show', $data);
+        return view('App\Modules\Pasien\Views\show', $data);
     }
 
     /**
@@ -106,7 +106,7 @@ class PasienController extends BaseController
             'validation' => session()->getFlashdata('validation'),
         ];
 
-        return view('App\Module\Pasien\Views\edit', $data);
+        return view('App\Modules\Pasien\Views\edit', $data);
     }
 
     /**

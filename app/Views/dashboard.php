@@ -1,4 +1,4 @@
-<?= $this->extend('App\Module\Pasien\Views\layout') ?>
+<?= $this->extend('App\Modules\Pasien\Views\layout') ?>
 
 <?= $this->section('header_actions') ?>
     <span class="badge badge-success py-2 px-3">
