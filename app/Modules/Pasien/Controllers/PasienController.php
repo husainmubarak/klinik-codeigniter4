@@ -33,11 +33,15 @@ class PasienController extends BaseController
     public function create()
     {
         $data = [
-            'title'      => 'Tambah Pasien Baru',
-            'validation' => session()->getFlashdata('validation'),
+            'title' => 'Tambah Pasien',
+            'validation' => \Config\Services::validation()
         ];
-
         return view('App\Modules\Pasien\Views\create', $data);
+    }
+
+    public function new()
+    {
+        return $this->create();
     }
 
     /**

@@ -40,6 +40,11 @@ class PendaftaranController extends BaseController
         return view('App\Modules\Pendaftaran\Views\create', $data);
     }
 
+    public function new()
+    {
+        return $this->create();
+    }
+
     public function store()
     {
         $rules = [

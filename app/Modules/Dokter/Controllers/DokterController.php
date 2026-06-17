@@ -32,6 +32,11 @@ class DokterController extends BaseController
         return view('App\Modules\Dokter\Views\create', $data);
     }
 
+    public function new()
+    {
+        return $this->create();
+    }
+
     public function store()
     {
         $rules = [
