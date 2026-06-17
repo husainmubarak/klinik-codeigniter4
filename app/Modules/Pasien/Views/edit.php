@@ -20,7 +20,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Edit Data — <?= esc($pasien['nama']) ?></h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Data — <?= esc($pasien['nama_pasien']) ?></h6>
             <span class="badge badge-info py-2 px-3"><?= esc($pasien['no_rm']) ?></span>
         </div>
         <div class="card-body">
@@ -37,7 +37,7 @@
                     <div class="col-md-6 form-group">
                         <label for="nama" class="text-gray-800 font-weight-bold">Nama Lengkap *</label>
                         <input type="text" name="nama" id="nama" class="form-control <?= isset($validation['nama']) ? 'is-invalid' : '' ?>"
-                               value="<?= old('nama', $pasien['nama']) ?>" required>
+                               value="<?= old('nama_pasien', $pasien['nama_pasien']) ?>" required>
                         <?php if (isset($validation['nama'])) : ?>
                             <div class="invalid-feedback"><?= $validation['nama'] ?></div>
                         <?php endif; ?>

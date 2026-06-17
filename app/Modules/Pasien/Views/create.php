@@ -38,7 +38,7 @@
                         <label for="nama" class="text-gray-800 font-weight-bold">Nama Lengkap *</label>
                         <input type="text" name="nama" id="nama" class="form-control <?= isset($validation['nama']) ? 'is-invalid' : '' ?>"
                                placeholder="Masukkan nama lengkap pasien"
-                               value="<?= old('nama') ?>" required>
+                               value="<?= old('nama_pasien') ?>" required>
                         <?php if (isset($validation['nama'])) : ?>
                             <div class="invalid-feedback"><?= $validation['nama'] ?></div>
                         <?php endif; ?>

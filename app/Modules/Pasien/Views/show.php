@@ -16,7 +16,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <div>
-                <h6 class="m-0 font-weight-bold text-primary"><?= esc($pasien['nama']) ?></h6>
+                <h6 class="m-0 font-weight-bold text-primary"><?= esc($pasien['nama_pasien']) ?></h6>
                 <small class="text-gray-500">Detail informasi pasien</small>
             </div>
             <?php if ($pasien['jenis_kelamin'] === 'Laki-laki') : ?>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <span class="text-xs font-weight-bold text-primary text-uppercase d-block">Nama Lengkap</span>
-                    <span class="h5 font-weight-bold text-gray-800"><?= esc($pasien['nama']) ?></span>
+                    <span class="h5 font-weight-bold text-gray-800"><?= esc($pasien['nama_pasien']) ?></span>
                 </div>
             </div>
             <hr class="my-2">
