@@ -1,4 +1,4 @@
-<?= $this->extend('App\Modules\Pasien\Views\layout') ?>
+<?= $this->extend('App\Views\layouts\main') ?>
 
 <?= $this->section('header_actions') ?>
     <a href="<?= base_url() ?>pasien/create" class="btn btn-primary" id="btn-tambah-pasien">
@@ -10,81 +10,76 @@
 <?= $this->section('content') ?>
 
     <!-- Stats -->
-    <div class="stat-cards">
-        <div class="stat-card">
-            <div class="stat-card-label">Total Pasien</div>
-            <div class="stat-card-value" style="color: var(--accent-primary);"><?= count($pasien) ?></div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-card-label">Laki-laki</div>
-            <div class="stat-card-value" style="color: #0284c7;">
-                <?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'Laki-laki')) ?>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase mb-1">Total Pasien</h6>
+                    <h2 class="display-5 fw-bold mb-0"><?= count($pasien) ?></h2>
+                </div>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-card-label">Perempuan</div>
-            <div class="stat-card-value" style="color: #db2777;">
-                <?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'Perempuan')) ?>
+        <div class="col-md-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase mb-1">Laki-laki</h6>
+                    <h2 class="display-5 fw-bold mb-0"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'L')) ?></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h6 class="card-title text-uppercase mb-1">Perempuan</h6>
+                    <h2 class="display-5 fw-bold mb-0"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'P')) ?></h2>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Table -->
     <div class="card">
-        <div class="card-header">
-            <h2>Data Pasien</h2>
-            <span style="font-size: 0.8rem; color: var(--text-muted);"><?= count($pasien) ?> data</span>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="m-0 font-weight-bold text-primary">Data Pasien</h5>
         </div>
+        <div class="card-body">
 
         <?php if (empty($pasien)) : ?>
-            <div class="empty-state">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div class="text-center py-5">
                 <h3>Belum ada data pasien</h3>
                 <p>Mulai tambahkan data pasien untuk mengelola rekam medis klinik Anda.</p>
-                <a href="<?= base_url() ?>pasien/create" class="btn btn-primary" id="btn-tambah-pasien-empty">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <a href="<?= base_url() ?>pasien/new" class="btn btn-primary">
                     Tambah Pasien Pertama
                 </a>
             </div>
         <?php else : ?>
-            <div class="table-wrapper">
-                <table id="table-pasien">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="table-pasien">
                     <thead>
                         <tr>
-                            <th>No. RM</th>
+                            <th>No RM</th>
                             <th>Nama Pasien</th>
-                            <th>Jenis Kelamin</th>
+                            <th>L/P</th>
                             <th>Tanggal Lahir</th>
-                            <th>No. Telepon</th>
+                            <th>No Telepon</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($pasien as $p) : ?>
                             <tr>
-                                <td>
-                                    <span style="font-family: monospace; font-size: 0.82rem; color: var(--accent-primary);"><?= esc($p['no_rm']) ?></span>
-                                </td>
-                                <td class="td-name"><?= esc($p['nama_pasien']) ?></td>
-                                <td>
-                                    <span class="badge <?= $p['jenis_kelamin'] === 'Laki-laki' ? 'badge-male' : 'badge-female' ?>">
-                                        <?= esc($p['jenis_kelamin']) ?>
-                                    </span>
-                                </td>
-                                <td><?= date('d M Y', strtotime($p['tanggal_lahir'])) ?></td>
+                                <td><?= esc($p['no_rm']) ?></td>
+                                <td><?= esc($p['nama_pasien']) ?></td>
+                                <td><?= $p['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan' ?></td>
+                                <td><?= date('d-m-Y', strtotime($p['tanggal_lahir'])) ?></td>
                                 <td><?= esc($p['no_telepon'] ?: '—') ?></td>
                                 <td>
-                                    <div class="td-actions">
-                                        <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>" class="btn btn-secondary btn-sm btn-icon" title="Lihat Detail" id="btn-lihat-<?= $p['id'] ?>">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                        </a>
-                                        <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>/edit" class="btn btn-secondary btn-sm btn-icon" title="Edit" id="btn-edit-<?= $p['id'] ?>">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm btn-icon" title="Hapus" onclick="confirmDelete(<?= $p['id'] ?>, '<?= esc($p['nama_pasien'] ?? $p['nama'] ?? '') ?>')" id="btn-hapus-<?= $p['id'] ?>">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                                        </button>
-                                    </div>
+                                    <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>" class="btn btn-sm btn-info">Detail</a>
+                                    <a href="<?= base_url() ?>pasien/<?= $p['id'] ?>/edit" class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="<?= base_url() ?>pasien/<?= $p['id'] ?>" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data pasien <?= esc($p['nama_pasien']) ?>?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
