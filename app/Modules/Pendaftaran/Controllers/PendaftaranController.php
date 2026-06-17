@@ -30,7 +30,7 @@ class PendaftaranController extends BaseController
         return view('App\Modules\Pendaftaran\Views\index', $data);
     }
 
-    public function create()
+    public function new()
     {
         $data['title'] = 'Tambah Pendaftaran';
         $data['pasiens'] = $this->pasienModel->findAll();
@@ -40,32 +40,27 @@ class PendaftaranController extends BaseController
         return view('App\Modules\Pendaftaran\Views\create', $data);
     }
 
-    public function new()
-    {
-        return $this->create();
-    }
-
-    public function store()
+    public function create()
     {
         $rules = [
-            'pasien_id' => 'required|integer',
-            'dokter_id' => 'required|integer',
-            'poli_id' => 'required|integer',
-            'tanggal_daftar' => 'required|valid_date',
-            'keluhan' => 'required'
+            'pasien_id'     => 'required|integer',
+            'dokter_id'     => 'required|integer',
+            'poli_id'       => 'required|integer',
+            'tanggal_daftar'=> 'required|valid_date',
+            'keluhan'       => 'required'
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput();
         }
 
         $this->model->save([
-            'pasien_id' => $this->request->getPost('pasien_id'),
-            'dokter_id' => $this->request->getPost('dokter_id'),
-            'poli_id' => $this->request->getPost('poli_id'),
+            'pasien_id'      => $this->request->getPost('pasien_id'),
+            'dokter_id'      => $this->request->getPost('dokter_id'),
+            'poli_id'        => $this->request->getPost('poli_id'),
             'tanggal_daftar' => $this->request->getPost('tanggal_daftar'),
-            'keluhan' => $this->request->getPost('keluhan'),
-            'status' => 'menunggu'
+            'keluhan'        => $this->request->getPost('keluhan'),
+            'status'         => 'menunggu'
         ]);
 
         return redirect()->to('pendaftaran')->with('success', 'Data pendaftaran berhasil ditambahkan');
@@ -97,7 +92,7 @@ class PendaftaranController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput();
         }
 
         $this->model->update($id, [

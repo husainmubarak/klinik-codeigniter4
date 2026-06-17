@@ -27,44 +27,44 @@ class PasienController extends BaseController
         return view('App\Modules\Pasien\Views\index', $data);
     }
 
-    /**
-     * Menampilkan form tambah pasien baru.
-     */
-    public function create()
+    public function new()
     {
         $data = [
             'title' => 'Tambah Pasien',
+            'no_rm' => $this->generateNoRm(),
             'validation' => \Config\Services::validation()
         ];
         return view('App\Modules\Pasien\Views\create', $data);
     }
 
-    public function new()
+    private function generateNoRm()
     {
-        return $this->create();
+        $lastPasien = $this->pasienModel->orderBy('id', 'DESC')->first();
+        $nextId = $lastPasien ? $lastPasien['id'] + 1 : 1;
+        return 'RM-' . date('Ym') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
     }
 
     /**
      * Menyimpan data pasien baru.
      */
-    public function store()
+    public function create()
     {
         $rules = [
             'no_rm'         => 'required|max_length[20]|is_unique[pasien.no_rm]',
-            'nama'          => 'required|max_length[100]',
-            'jenis_kelamin' => 'required|in_list[Laki-laki,Perempuan]',
+            'nama_pasien'   => 'required|max_length[100]',
+            'jenis_kelamin' => 'required|in_list[L,P]',
             'tanggal_lahir' => 'required|valid_date',
             'alamat'        => 'required',
             'no_telepon'    => 'permit_empty|max_length[20]',
         ];
 
         if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+            return redirect()->back()->withInput();
         }
 
         $this->pasienModel->save([
             'no_rm'         => $this->request->getPost('no_rm'),
-            'nama'          => $this->request->getPost('nama'),
+            'nama_pasien'   => $this->request->getPost('nama_pasien'),
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'tanggal_lahir' => $this->request->getPost('tanggal_lahir'),
             'alamat'        => $this->request->getPost('alamat'),
@@ -126,20 +126,20 @@ class PasienController extends BaseController
 
         $rules = [
             'no_rm'         => "required|max_length[20]|is_unique[pasien.no_rm,id,{$id}]",
-            'nama'          => 'required|max_length[100]',
-            'jenis_kelamin' => 'required|in_list[Laki-laki,Perempuan]',
+            'nama_pasien'   => 'required|max_length[100]',
+            'jenis_kelamin' => 'required|in_list[L,P]',
             'tanggal_lahir' => 'required|valid_date',
             'alamat'        => 'required',
             'no_telepon'    => 'permit_empty|max_length[20]',
         ];
 
         if (! $this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator->getErrors());
+            return redirect()->back()->withInput();
         }
 
         $this->pasienModel->update($id, [
             'no_rm'         => $this->request->getPost('no_rm'),
-            'nama'          => $this->request->getPost('nama'),
+            'nama_pasien'   => $this->request->getPost('nama_pasien'),
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'tanggal_lahir' => $this->request->getPost('tanggal_lahir'),
             'alamat'        => $this->request->getPost('alamat'),
@@ -158,6 +158,11 @@ class PasienController extends BaseController
 
         if (! $pasien) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Data pasien tidak ditemukan.');
+        }
+
+        $pendaftaranModel = new \App\Modules\Pendaftaran\Models\PendaftaranModel();
+        if ($pendaftaranModel->where('pasien_id', $id)->first()) {
+            return redirect()->to('pasien')->with('error', 'Gagal menghapus! Pasien tidak dapat dihapus karena memiliki riwayat pendaftaran.');
         }
 
         $this->pasienModel->delete($id);

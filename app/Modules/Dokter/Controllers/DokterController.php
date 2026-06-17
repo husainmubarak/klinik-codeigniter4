@@ -48,7 +48,7 @@ class DokterController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput();
         }
 
         $this->model->save([
@@ -92,7 +92,7 @@ class DokterController extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
+            return redirect()->back()->withInput();
         }
 
         $this->model->update($id, [

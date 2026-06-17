@@ -14,7 +14,7 @@ class PasienModel extends Model
 
     protected $allowedFields = [
         'no_rm',
-        'nama',
+        'nama_pasien',
         'jenis_kelamin',
         'tanggal_lahir',
         'alamat',
@@ -30,8 +30,8 @@ class PasienModel extends Model
     // Validation
     protected $validationRules = [
         'no_rm'         => 'required|max_length[20]',
-        'nama'          => 'required|max_length[100]',
-        'jenis_kelamin' => 'required|in_list[Laki-laki,Perempuan]',
+        'nama_pasien'   => 'required|max_length[100]',
+        'jenis_kelamin' => 'required|in_list[L,P]',
         'tanggal_lahir' => 'required|valid_date',
         'alamat'        => 'required',
     ];
@@ -41,7 +41,7 @@ class PasienModel extends Model
             'required'   => 'Nomor Rekam Medis wajib diisi.',
             'max_length' => 'Nomor Rekam Medis maksimal 20 karakter.',
         ],
-        'nama' => [
+        'nama_pasien' => [
             'required'   => 'Nama pasien wajib diisi.',
             'max_length' => 'Nama pasien maksimal 100 karakter.',
         ],

@@ -11,7 +11,7 @@
             <form action="<?= base_url() ?>pasien" method="post">
                 <div class="mb-3">
                     <label for="no_rm" class="form-label">Nomor Rekam Medis</label>
-                    <input type="text" class="form-control <?= $validation->hasError('no_rm') ? 'is-invalid' : '' ?>" id="no_rm" name="no_rm" value="<?= old('no_rm') ?>">
+                    <input type="text" class="form-control <?= $validation->hasError('no_rm') ? 'is-invalid' : '' ?>" id="no_rm" name="no_rm" value="<?= old('no_rm', $no_rm ?? '') ?>" readonly>
                     <div class="invalid-feedback">
                         <?= $validation->getError('no_rm') ?>
                     </div>
