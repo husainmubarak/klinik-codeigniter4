@@ -31,6 +31,7 @@
             <hr>
             <a href="<?= base_url() ?>pendaftaran" class="<?= uri_string() == 'pendaftaran' ? 'active' : '' ?>"><i class="bi bi-calendar-check"></i> Pendaftaran</a>
             <a href="<?= base_url() ?>pasien" class="<?= uri_string() == 'pasien' ? 'active' : '' ?>"><i class="bi bi-person"></i> Pasien</a>
+            <a href="<?= base_url() ?>pemeriksaan" class="<?= uri_string() == 'pemeriksaan' ? 'active' : '' ?>"><i class="bi bi-clipboard2-pulse"></i> Pemeriksaan</a>
             
             <?php if(session()->get('role') == 'admin'): ?>
                 <a href="<?= base_url() ?>dokter" class="<?= uri_string() == 'dokter' ? 'active' : '' ?>"><i class="bi bi-heart-pulse"></i> Dokter</a>

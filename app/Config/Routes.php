@@ -16,6 +16,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->resource('dokter', ['namespace' => 'App\Modules\Dokter\Controllers', 'controller' => 'DokterController']);
     $routes->resource('poli', ['namespace' => 'App\Modules\Poli\Controllers', 'controller' => 'PoliController']);
     $routes->resource('pendaftaran', ['namespace' => 'App\Modules\Pendaftaran\Controllers', 'controller' => 'PendaftaranController']);
+    $routes->resource('pemeriksaan', ['namespace' => 'App\Modules\Pemeriksaan\Controllers', 'controller' => 'PemeriksaanController']);
     $routes->get('laporan', '\App\Modules\Laporan\Controllers\LaporanController::index', ['filter' => 'admin']);
     $routes->get('laporan/export-pdf', '\App\Modules\Laporan\Controllers\LaporanController::exportPdf', ['filter' => 'admin']);
 });
