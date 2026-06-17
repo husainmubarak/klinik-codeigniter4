@@ -21,19 +21,14 @@ class PoliController extends BaseController
         return view('App\Modules\Poli\Views\index', $data);
     }
 
-    public function create()
+    public function new()
     {
         $data['title'] = 'Tambah Poli';
         $data['validation'] = \Config\Services::validation();
         return view('App\Modules\Poli\Views\create', $data);
     }
 
-    public function new()
-    {
-        return $this->create();
-    }
-
-    public function store()
+    public function create()
     {
         $rules = [
             'nama_poli' => [
@@ -105,6 +100,16 @@ class PoliController extends BaseController
 
     public function delete($id = null)
     {
+        $dokterModel = new \App\Modules\Dokter\Models\DokterModel();
+        if ($dokterModel->where('poli_id', $id)->first()) {
+            return redirect()->to('poli')->with('error', 'Gagal menghapus! Poli ini masih memiliki dokter yang terdaftar di dalamnya.');
+        }
+
+        $pendaftaranModel = new \App\Modules\Pendaftaran\Models\PendaftaranModel();
+        if ($pendaftaranModel->where('poli_id', $id)->first()) {
+            return redirect()->to('poli')->with('error', 'Gagal menghapus! Poli ini memiliki riwayat pendaftaran yang terkait.');
+        }
+
         $this->model->delete($id);
         return redirect()->to('poli')->with('success', 'Data poli berhasil dihapus');
     }

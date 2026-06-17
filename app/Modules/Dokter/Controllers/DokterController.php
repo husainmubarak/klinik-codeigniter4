@@ -24,7 +24,7 @@ class DokterController extends BaseController
         return view('App\Modules\Dokter\Views\index', $data);
     }
 
-    public function create()
+    public function new()
     {
         $data['title'] = 'Tambah Dokter';
         $data['polis'] = $this->poliModel->findAll();
@@ -32,12 +32,7 @@ class DokterController extends BaseController
         return view('App\Modules\Dokter\Views\create', $data);
     }
 
-    public function new()
-    {
-        return $this->create();
-    }
-
-    public function store()
+    public function create()
     {
         $rules = [
             'nama_dokter' => 'required|max_length[100]',
@@ -108,6 +103,11 @@ class DokterController extends BaseController
 
     public function delete($id = null)
     {
+        $pendaftaranModel = new \App\Modules\Pendaftaran\Models\PendaftaranModel();
+        if ($pendaftaranModel->where('dokter_id', $id)->first()) {
+            return redirect()->to('dokter')->with('error', 'Gagal menghapus! Dokter ini memiliki riwayat pendaftaran yang terkait.');
+        }
+
         $this->model->delete($id);
         return redirect()->to('dokter')->with('success', 'Data dokter berhasil dihapus');
     }
