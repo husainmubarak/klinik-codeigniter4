@@ -30,7 +30,7 @@
             <div class="card bg-primary text-white">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase mb-1">Total Pasien</h6>
-                    <h2 class="display-5 fw-bold mb-0"><?= count($pasien) ?></h2>
+                    <h2 class="display-5 fw-bold mb-0 text-white"><?= count($pasien) ?></h2>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="card bg-info text-white">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase mb-1">Laki-laki</h6>
-                    <h2 class="display-5 fw-bold mb-0"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'L')) ?></h2>
+                    <h2 class="display-5 fw-bold mb-0 text-white"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'L')) ?></h2>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <div class="card bg-danger text-white">
                 <div class="card-body">
                     <h6 class="card-title text-uppercase mb-1">Perempuan</h6>
-                    <h2 class="display-5 fw-bold mb-0"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'P')) ?></h2>
+                    <h2 class="display-5 fw-bold mb-0 text-white"><?= count(array_filter($pasien, fn($p) => $p['jenis_kelamin'] === 'P')) ?></h2>
                 </div>
             </div>
         </div>
