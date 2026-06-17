@@ -26,7 +26,9 @@ class AuthController extends BaseController
 
         if ($data) {
             $pass = $data['password'];
-            $authenticatePassword = password_verify($password, $pass);
+            // Check if password uses MD5 or password_hash
+            $authenticatePassword = (md5($password) === $pass) || password_verify($password, $pass);
+            
             if ($authenticatePassword) {
                 $ses_data = [
                     'id' => $data['id'],
